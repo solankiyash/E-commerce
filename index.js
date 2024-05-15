@@ -1,34 +1,31 @@
-import express from "express"
-import mongoose from "mongoose"
-import jwt from "jsonwebtoken"
+import mongoose from "mongoose";
+import express, { Router } from "express"
+import upload from "./Router/uploadrouter.js"
+import product from "./Router/productrouter.js"
+import userrouter from "./Router/userrouter.js"
+import bodyParser from "body-parser";
 import cors from "cors"
-import  uploadroute  from "./routes/uploadRoute.js"
-import product from "./routes/product.js"
+const app = express()
 
 const port = 4000
-const app = express();
 
-app.use(express.json())
-app.use(cors())
+const dbUrl = "mongodb+srv://yashsolanki:yashsolanki@cluster0.dpwnf3i.mongodb.net/E-commerce"
+mongoose.connect(dbUrl)
+.then(() => console.log("Connected to MongoDB"))
+.catch((error) => console.log('MongoDB connection error:',error))
 
 mongoose.connect("mongodb+srv://yashsolanki:yashsolanki@cluster0.dpwnf3i.mongodb.net/E-commerce")
 
-app.get("/",(req,res) => {
-    res.send("Exprees app is running")
+// routes use
+app.use(bodyParser.json())
+app.use('/images', express.static('upload/images'));
+app.use(cors())
+app.use("/",upload)
+app.use("/product",product)
+app.use("/",userrouter)
+
+app.listen(port,() => {
+    console.log(`server is running on ${port}`)
 })
 
-app.use("/images",express.static("/upload/images"))
 
-
-app.use("/upload",uploadroute)
-app.use("/addproduct",product)
-
-
-app.listen(port,(error) => {
-    if(!error){
-        console.log("Server Running on Port" + " " + port)
-    }
-    else{
-        console.log("Error :"+error)
-    }
-})
