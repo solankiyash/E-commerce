@@ -7,7 +7,7 @@ function Hero() {
   return (
     <div className="hero">
       <div className="hero-left">
-        <h2>NEEW ARRIVALS ONLY</h2>
+        <h2>NEEW ARRIVALS ONLY data</h2>
         <div>
             <div className="hero-hand-icon">
                 <p>new</p>
