@@ -5,7 +5,6 @@
 
   function CartItems() {
     const { cart,MatchPromocode , handelChange, removeToCart ,getTotalAmount,promocodeValue } = useContext(ShopContext);
-    
     return (
       <div className='cartitems'>
         <div className="cartitem-format-main">
@@ -14,7 +13,7 @@
           <p>Price</p>
           <p>Quantity</p>
           <p>Total</p>
-          <p>Remov</p>
+          <p>Remove</p>  
         </div>
         <hr />
         {cart?.map((item) => (

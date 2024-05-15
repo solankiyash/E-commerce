@@ -1,19 +1,56 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from "axios"
 import "./CSS/LoginRegister.css"
 function LoginRegister() {
+  const [state,setState] = useState("Singup")
+  const [formData,setFormData] = useState({
+    name:"",
+    email:"",
+    password:""
+  })
+
+  const changeHandler = (e) => {
+    setFormData({...formData,[e.target.name]:e.target.value})
+  }
+  
+
+  const login = async() => {
+   
+   await axios.post("http://localhost:4000/login",formData)
+   .then((res) => {
+    if(res.data.success){ 
+      localStorage.setItem("auth-token",JSON.stringify(res.data))
+      window.location.replace("/")
+    }
+   })
+      
+   
+  }
+  const singup = async() => {  
+    await axios.post("http://localhost:4000/user",formData)
+    .then((res) =>{
+      if(res.data.success){ 
+        localStorage.setItem("auth-token",JSON.stringify(res.data))
+        setState("Login")
+      }
+    } )
+  } 
   return (
     <div className='loginsingup'>
         <div className="loginsinup-container">
-          <h1>Sing Up</h1>
+          <h1>{state}</h1>
           <div className="loginsingup-fileds">
-            <input type="text" placeholder='Your Name'/>
-            <input type="email" placeholder='Your Email'/>
-            <input type="password" placeholder='Password'/>
+           {state === "Singup" ?  <input name='name' value={formData.name} onChange={changeHandler} type="text" placeholder='Your Name'/>:<></>}
+            <input name='email' value={formData.email} onChange={changeHandler} type="email" placeholder='Your Email'/>
+            <input name='password' value={formData.password} onChange={changeHandler} type="password" placeholder='Password'/>
           </div>
-          <button>Continue</button>
-          <p className="loginsinup-login">
+          <button onClick={() => {state === "Login" ? login() : singup() }} >Continue</button>
+          {state === "Singup" ? <p className="loginsinup-login">
             Already have an account <span>Login</span>
-          </p>
+          </p>: <p className="loginsinup-login">
+            Create an account <span>Click here</span>
+          </p>}
+         
           <div className="loginsingup-agree">
             <input type="checkbox" name='' id=''/>
             <p>By continuing, i agree to the terms of use & privacy policy</p>
