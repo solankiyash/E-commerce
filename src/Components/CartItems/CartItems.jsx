@@ -12,7 +12,7 @@
           <p>Title</p>
           <p>Price</p>
           <p>Quantity</p>
-          <p>Total</p>
+          <p>Tota</p>
           <p>Remove</p>  
         </div>
         <hr />
