@@ -9,10 +9,9 @@
       <div className='cartitems'>
         <div className="cartitem-format-main">
           <p>Product</p>
-          <p>Title</p>
           <p>Price</p>
           <p>Quantity</p>
-          <p>Tota</p>
+          <p>Total</p>
           <p>Remove</p>  
         </div>
         <hr />
