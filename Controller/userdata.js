@@ -40,15 +40,6 @@ export const login = async (req,res) => {
     }
     const math = await bcrypy.compare(req.body.password,foundUser.password)
     if(!math)res.status(400).json({success:false,error:"Invalid Password"})
-        else{
-            const data = {
-                user:{
-                    id:foundUser.id
-                }
-            }
-            const token = jwt.sign(data,"secretcode");
-            res.json({success:true,token})
-        }
    } catch (error) {
     res.status(500).json(error)
    }

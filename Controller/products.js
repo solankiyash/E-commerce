@@ -26,6 +26,7 @@ export const products = async (req, res) => {
     }
 
     export const removeproducts = async (req, res) => {
+        console.log(req.body.id)
         try {
             const deletedProduct = await product.findOneAndDelete(req.body.id);
 
@@ -61,3 +62,23 @@ export const products = async (req, res) => {
         }
     }
     
+    export const updateproduct  = async(req,res) => {
+        const { id }  = req.params;
+        const { name, old_price, new_price, category, image } = req.body;
+        console.log("req.bodyreq.body",req.body)
+        try {
+          const updatedProduct = await product.findByIdAndUpdate(
+            {_id:id},
+            req.body,
+            { new: true }
+          );
+      
+          if (!updatedProduct) {
+            return res.status(404).send({ message: 'Product not found' });
+          }
+      
+          res.send(updatedProduct);
+        } catch (error) {
+          res.status(500).send({ message: 'Error updating product', error });
+        }
+    }
