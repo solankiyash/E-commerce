@@ -8,7 +8,7 @@
 }
 .cartitem-format-main{
     display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     gap: 75px;
     padding: 20px 0px;
@@ -90,4 +90,26 @@
     font-size: 16px;
     background: black;
     color: white;
+}
+.items hr{
+    height: 3px;
+    background: #e2e2e2;
+    border: 0;
+}
+.size-option {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.size-option:hover {
+  background-color: #f0f0f0;
+}
+
+.size-option.active {
+  border-color: red;
+  background-color: #ddd;
 }

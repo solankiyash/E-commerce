@@ -22,15 +22,11 @@ const ShopContextProvider = (props) => {
       setCart([...cart, { ...product, quantity: 1 }]);
     }
   };
-
   const handelChange = (e) => {
     setPromocodeValue(e.target.value)
   }
- 
-  
   const removeToCart = (product) => {
     const existingProductIndex = cart.findIndex((item) => item.id === product.id);
-  
     if (existingProductIndex !== -1) {
       const updatedCart = [...cart];
       updatedCart[existingProductIndex] = {
@@ -50,7 +46,6 @@ const ShopContextProvider = (props) => {
       let getQuantity = cart.map((i) => i.quantity)
      return getQuantity.reduce((a,b) => a + b,0)
     }
-   
     const getTotalAmount = () => {
       const newcart = [...cart];
       let quantityPrice = newcart.map((item) => item.new_price * item.quantity);

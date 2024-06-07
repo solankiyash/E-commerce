@@ -6,6 +6,7 @@ import hero_image from "../../Assetes/shop.jpg"
 function Hero() {
   return (
     <div className="hero">
+      
       <div className="hero-left">
         <h2>NEEW ARRIVALS ONLY dsds</h2>
         <div>

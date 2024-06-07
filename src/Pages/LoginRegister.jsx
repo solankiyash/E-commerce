@@ -8,33 +8,37 @@ function LoginRegister() {
     email:"",
     password:""
   })
-
   const changeHandler = (e) => {
     setFormData({...formData,[e.target.name]:e.target.value})
-  }
-  
-
-  const login = async() => {
-   
-   await axios.post("http://localhost:4000/login",formData)
-   .then((res) => {
-    if(res.data.success){ 
-      localStorage.setItem("auth-token",JSON.stringify(res.data))
-      window.location.replace("/")
-    }
-   })
-      
-   
   }
   const singup = async() => {  
     await axios.post("http://localhost:4000/user",formData)
     .then((res) =>{
-      if(res.data.success){ 
+      if(res.data.success === true){ 
         localStorage.setItem("auth-token",JSON.stringify(res.data))
         setState("Login")
+        setFormData({
+          email:"",
+          password:""
+        })
+      }else{
+        setState("Singup")
       }
-    } )
+    } ).catch((err) => console.log(err))
   } 
+
+  const login = async() => {
+   
+    await axios.post("http://localhost:4000/login",formData)
+    .then((res) => {
+     if(res.data.success === true){ 
+     
+       window.location.replace("/")
+     }else{
+       setState("login")
+     }
+    }).catch((err) => console.log(err))
+   }
   return (
     <div className='loginsingup'>
         <div className="loginsinup-container">
@@ -46,9 +50,9 @@ function LoginRegister() {
           </div>
           <button onClick={() => {state === "Login" ? login() : singup() }} >Continue</button>
           {state === "Singup" ? <p className="loginsinup-login">
-            Already have an account <span>Login</span>
+            Already have an account <span style={{cursor:"pointer"}} onClick={() => setState("login")}>Login</span>
           </p>: <p className="loginsinup-login">
-            Create an account <span>Click here</span>
+            Create an account <span style={{cursor:"pointer"}} onClick={() => setState("Singup")}>Click here</span>
           </p>}
          
           <div className="loginsingup-agree">
