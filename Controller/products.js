@@ -82,3 +82,18 @@ export const products = async (req, res) => {
           res.status(500).send({ message: 'Error updating product', error });
         }
     }
+
+    export const findproductbyid = async (req, res) => {
+        const {id} = req.params;
+        try {
+           
+            const getdata = await product.findById(id);
+            if (!getdata) {
+                return res.status(402).json({ message: "No data found" });
+            }
+    
+            return res.status(200).json({ success: true, getdata });
+        } catch (error) {
+            return res.status(500).json(error);
+        }
+    };
