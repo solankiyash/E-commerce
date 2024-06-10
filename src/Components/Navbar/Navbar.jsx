@@ -11,9 +11,11 @@ function Navbar() {
     const manuRef = useRef()
 
     const dropdowntoggel = (e) => {
+      e.preventDefault()
       manuRef.current.classList.toggle("nav-menu-visible")
       e.target.classList.toggle('open')
     }
+   
   return (
     <div className='navbar'>
         <div className='navbar-logo'>

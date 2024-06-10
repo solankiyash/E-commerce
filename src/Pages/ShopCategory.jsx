@@ -22,7 +22,7 @@ function ShopCategory(props) {
     .then((res) => setAllProduct(res.data))
     .catch((err) => console.log(err))
   },[])
-
+console.log(all_product,"allProducts")
   useEffect(() => {
     let allPrices = [];
     all_product.forEach((option) => {
@@ -94,7 +94,7 @@ function ShopCategory(props) {
         {filteredProducts.slice(0, visibleproduct).map((item, i) => (
           <Item
             key={i}
-            id={item.id}
+            id={item._id}
             name={item.name}
             image={item.image}
             new_price={item.new_price}

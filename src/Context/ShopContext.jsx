@@ -3,11 +3,14 @@ import all_product from "../Assetes/all_product";
 
 export const ShopContext = createContext(null);
 
+
+
 const ShopContextProvider = (props) => {
     
   const [cart, setCart] = useState([]);
   const promocode = "yashsolanki1912"
   const [promocodeValue,setPromocodeValue] = useState(null)
+  
 
   const addToCart = (product) => {
     const existingProductIndex = cart.findIndex((item) => item.id === product.id);

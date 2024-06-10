@@ -51,7 +51,7 @@ function CartItems() {
                     alt=""
                     className="carticon-product-icon"
                   />
-                  <p>{item.name}</p>
+                  <p>{item.category}</p>
                   <p>${item.new_price}</p>
                   <p>{item.size.join(" , ")}</p>
                   <button className="cartitem-quantity">{item.quantity}</button>

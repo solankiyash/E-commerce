@@ -12,6 +12,7 @@ import women_banner from "./Assetes/banner_women.png"
 import kid_banner from "./Assetes/banner_kids.png"
 import Practish from './Pages/Practish';
 import Loginprotect from './utils/Loginprotect';
+import NotFound from './Components/NotFound/NotFound';
 
 function App() {
   return (
@@ -19,15 +20,16 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path='/' element={<Loginprotect><Shop/></Loginprotect>}/>
-        <Route path='/mens' element={<ShopCategory banner={men_banner} category="men"/>}/>
-        <Route path='/women' element={<ShopCategory banner={women_banner} category="women"/>}/> 
-        <Route path='/kids' element={<ShopCategory banner={kid_banner} category="kid"/>}/>
+        <Route path='/mens' element={<Loginprotect><ShopCategory banner={men_banner} category="men"/></Loginprotect>}/>
+        <Route path='/women' element={<Loginprotect><ShopCategory banner={women_banner} category="women"/></Loginprotect>}/> 
+        <Route path='/kids' element={<Loginprotect><ShopCategory banner={kid_banner} category="kid"/></Loginprotect>}/>
         <Route path='/product' element={<Product/>}>
           <Route path=':productId' element={<Product/>}/>
           </Route>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/login' element={<LoginRegister/>}/>
           <Route path='/data' element={<Practish/>}/>
+          <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer/>
     </BrowserRouter>
