@@ -3,6 +3,7 @@ import './ListProduct.css';
 import axios from 'axios';
 import cross_icon from '../../assets/cross_icon.png';
 import edit_icon from '../../assets/edit.jpeg';
+import AddProduct from '../AddProduct/AddProduct';
 
 function ListProduct() {
   const [getProducts, setGetProducts] = useState([]);
