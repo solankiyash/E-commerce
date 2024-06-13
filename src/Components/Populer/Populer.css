@@ -21,6 +21,18 @@
     display: flex;
     gap: 30px;
 }
+/* Example CSS */
+.icon-star-empty {
+    color: #ddd; /* Color for empty star */
+    font-size: 50px;
+  }
+  
+  .icon-star-full {
+    color: gold; /* Color for filled star */
+    font-size: 50px;
+  }
+  
+  
 
 @media(max-width:1280px){
     .populer{

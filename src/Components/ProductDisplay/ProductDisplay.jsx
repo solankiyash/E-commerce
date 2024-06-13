@@ -3,23 +3,33 @@ import './ProductDisplay.css';
 import star_icon from '../../Assetes/star_icon.png';
 import star_dull_icon from '../../Assetes/star_dull_icon.png';
 import { ShopContext } from '../../Context/ShopContext';
+import LoginRegister from '../../Pages/LoginRegister';
+import { useNavigate } from 'react-router-dom';
 
 function ProductDisplay(props) {
   const { addToCart } = useContext(ShopContext);
   const { product } = props;
   const [selectedSize, setSelectedSize] = useState([]);
+  const navigate = useNavigate()
 
   const handleSizeSelect = (size) => {
     setSelectedSize((pre) => ([...pre,size]));
   };
 
   const handleAddToCart = () => {
+
+    if(!localStorage.getItem("auth-token")){
+      navigate("/login")
+    }else{
+
+    
     if (selectedSize) {
       addToCart({ ...product?.getdata, size: selectedSize });
     } else {
       alert('Please select a size');
     }
   };
+}
 
   return (
     <div className='productdisplay'>

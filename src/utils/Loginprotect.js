@@ -1,14 +1,15 @@
 import { jwtDecode } from 'jwt-decode'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,useLocation } from 'react-router-dom'
 function Loginprotect({children}) {
     const [login,setLogin] = useState(false)
+    const location = useLocation()
     const navigate = useNavigate()
     const checkLoginUser = () => {
         const getUser = localStorage.getItem("auth-token")
         if(getUser){
             setLogin(true)
-            navigate("/")
+            navigate(location.pathname)
         }else{
             setLogin(false)
             navigate("/login")

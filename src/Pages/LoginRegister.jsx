@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
-import {jwtDecode} from "jwt-decode"
 import "./CSS/LoginRegister.css"
 
 import { useNavigate } from 'react-router-dom'
@@ -42,9 +41,6 @@ function LoginRegister() {
      }
     }).catch((err) => console.log(err))
    }
-
- 
-
   return (
     <div className='loginsingup'>
         <div className="loginsinup-container">

@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./CartItem.css";
 import { ShopContext } from "../../Context/ShopContext";
 import removeicon from "../../Assetes/cart_cross_icon.png";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
 function CartItems() {
   const {
@@ -12,7 +14,40 @@ function CartItems() {
     getTotalAmount,
     promocodeValue,
   } = useContext(ShopContext);
-  console.log(cart);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClickCheckout = async () => {
+    console.log("cart", cart);
+    let amount = getTotalAmount();
+
+    const stripePromise = await loadStripe("pk_test_51PQQCu2NJpcN49oVE6dZ8YA4eWoLEsySfzWGb8lGv1QITXwIkdeRZ3uJ76Go6mQi7rXgyZzBkK2JDbiRt7bTpms400eS5zpV6U");
+
+    try {
+      const response = await axios.post("http://localhost:4000/payment", {
+        amount,
+        category: cart[0].category,  // Assuming single category for simplicity
+        quantity: cart.length,  // Total number of items
+        size: cart.map((i) => i.size).flat(),  // Flattened array of sizes
+        image: cart[0].image  // Assuming single image for simplicity
+      });
+
+      const session = response.data;
+      const stripe = await stripePromise;
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.sessionId
+      });
+
+      if (result.error) {
+        console.log(result.error.message);
+        // Handle error here
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle error here
+    }
+  };
+
   return (
     <div className="cartitems">
       <div className="cartitem-format-main">
@@ -42,7 +77,6 @@ function CartItems() {
         <div className="items">
           <hr />
           {cart?.map((item) => {
-            console.log("item.sizeitem.size",item.size.length)
             return (
               <div key={item.id}>
                 <div className="cartitem-format cartitem-format-main">
@@ -66,13 +100,13 @@ function CartItems() {
                 <hr />
               </div>
             );
-          })}{" "}
+          })}
         </div>
       )}
 
       <div className="cartitem-down">
         <div className="cartitem-total">
-          <h1>cart Total</h1>
+          <h1>Cart Total</h1>
           <div>
             <div className="cartitem-total-item">
               <p>Subtotal</p>
@@ -89,10 +123,12 @@ function CartItems() {
               <h3>${getTotalAmount()}</h3>
             </div>
           </div>
-          <button>PROCEED TO CHECKOUT</button>
+          <button onClick={handleClickCheckout} disabled={isLoading}>
+            {isLoading ? "Processing..." : "Proceed to Checkout"}
+          </button>
         </div>
         <div className="cartitem-promocode">
-          <p>If you have a promo code,Enter it here</p>
+          <p>If you have a promo code, enter it here</p>
           <div className="cartitem-promobox">
             <input
               onChange={handelChange}
