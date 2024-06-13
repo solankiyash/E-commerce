@@ -1,31 +1,30 @@
 import mongoose from "mongoose";
-import express, { Router } from "express"
-import upload from "./Router/uploadrouter.js"
-import product from "./Router/productrouter.js"
-import userrouter from "./Router/userrouter.js"
+import express from "express";
 import bodyParser from "body-parser";
-import cors from "cors"
-const app = express()
+import cors from "cors";
+import dotenv from 'dotenv';
+import router from "./Router/index.js"
 
-const port = 4000
+dotenv.config();
 
-const dbUrl = "mongodb+srv://yashsolanki:yashsolanki@cluster0.dpwnf3i.mongodb.net/E-commerce"
-mongoose.connect(dbUrl)
-.then(() => console.log("Connected to MongoDB"))
-.catch((error) => console.log('MongoDB connection error:',error))
+const app = express();
+const port = 4000;
 
-mongoose.connect("mongodb+srv://yashsolanki:yashsolanki@cluster0.dpwnf3i.mongodb.net/E-commerce")
+const dbUrl = "mongodb+srv://yashsolanki:yashsolanki@cluster0.dpwnf3i.mongodb.net/E-commerce";
+mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.log('MongoDB connection error:', error));
 
-// routes use
-app.use(bodyParser.json())
+
+// Middleware
+app.use(bodyParser.json());
 app.use('/images', express.static('upload/images'));
-app.use(cors())
-app.use("/",upload)
-app.use("/product",product)
-app.use("/",userrouter)
+app.use(cors());
 
-app.listen(port,() => {
-    console.log(`server is running on ${port}`)
-})
+// Routes
+app.use("/", router);
 
-
+  
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

@@ -6,7 +6,8 @@ export const products = async (req, res) => {
     if(Product_Data.length){
         let last_product_array = Product_Data.slice(-1)
         let last_product = last_product_array[0]
-        id = last_product.id + 1 
+        id = last_product.id + 1
+        
     }else{
         id = 1  
     }
@@ -64,8 +65,6 @@ export const products = async (req, res) => {
     
     export const updateproduct  = async(req,res) => {
         const { id }  = req.params;
-        const { name, old_price, new_price, category, image } = req.body;
-        console.log("req.bodyreq.body",req.body)
         try {
           const updatedProduct = await product.findByIdAndUpdate(
             {_id:id},
