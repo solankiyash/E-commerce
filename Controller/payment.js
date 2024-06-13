@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const stripe = new Stripe(process.env.stripekey);
-
+console.log()
 export const stripepayment = async (req, res) => {
   const {image,category,size,quantity} = req.body
   console.log("image",image)
