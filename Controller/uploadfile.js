@@ -1,6 +1,7 @@
 import {cloudinary} from '../middelwere/cloudinory.js'; // Adjust path as per your project structure
 
 export const uploadfile = async (req, res) => {
+  console.log("")
   try {
     if (!req.file) {
       return res.status(400).json({ message: 'No file uploaded' });
