@@ -1,10 +1,9 @@
-import express from "express"
-import upload from "../middelwere/upload.js"
-import { uploadfile } from "../Controller/uploadfile.js"
+import express from "express";
+import upload from "../middelwere/upload.js";
+import { uploadfile } from "../Controller/uploadfile.js";
 
+const router = express.Router();
 
-const router = express.Router()
+router.post("/upload", upload.single("product"), uploadfile);
 
-router.post("/upload",upload.single("product"),uploadfile)
-
-export default router
+export default router;

@@ -1,9 +1,8 @@
-import express from "express"
-import { stripepayment } from "../Controller/payment.js"
+import express from "express";
+import { stripepayment } from "../Controller/payment.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post("/payment",stripepayment)
+router.post("/payment", stripepayment);
 
-export default router
-
+export default router;

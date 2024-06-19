@@ -1,37 +1,39 @@
-import Stripe from 'stripe';  // Correct import statement
-import dotenv from 'dotenv';
+import Stripe from "stripe"; 
+import dotenv from "dotenv";
 
 dotenv.config();
 const stripe = new Stripe(process.env.stripekey);
-console.log()
+console.log();
 export const stripepayment = async (req, res) => {
-  const {image,category,size,quantity} = req.body
-  console.log("image",image)
-    try {
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items: [
-          {
-            price_data: {
-              currency: 'inr',
-              product_data: {
-                name: 'Total Amount',
-                description:`Category:${category},Quantity:${quantity},Size:${size.join(", ")}`,
-                images:[image]
-              },
-              
-              unit_amount: req.body.amount * 100,
+  const { image, category, size, quantity } = req.body;
+  console.log("image", image);
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "inr",
+            product_data: {
+              name: "Total Amount",
+              description: `Category:${category},Quantity:${quantity},Size:${size.join(
+                ", "
+              )}`,
+              images: [image],
             },
-            quantity: quantity,
+
+            unit_amount: req.body.amount * 100,
           },
-        ],
-        mode: 'payment',
-        success_url: 'https://your-website.com/thank-you',
-        cancel_url: 'https://your-website.com/cancel',
-      });
-  
-      res.send({ sessionId: session.id });
-    } catch (error) {
-      res.status(500).send({ error: error.message });
-    }
+          quantity: quantity,
+        },
+      ],
+      mode: "payment",
+      success_url: "https://your-website.com/thank-you",
+      cancel_url: "https://your-website.com/cancel",
+    });
+
+    res.send({ sessionId: session.id });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
 };
