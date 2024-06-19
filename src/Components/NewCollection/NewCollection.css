@@ -7,12 +7,12 @@
 }
 .newcollection h1{
     color: #171717;
-    font-size: 50px;
-    font-weight: 600;
+    font-size: 40px;
+    font-weight: 500;
 }
 .newcollection hr{
     width: 200px;
-    height: 6px;
+    height: 3px;
     border-radius: 10px;
     background: #252525;
 }

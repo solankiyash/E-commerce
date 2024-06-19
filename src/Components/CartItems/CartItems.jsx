@@ -20,22 +20,24 @@ function CartItems() {
     console.log("cart", cart);
     let amount = getTotalAmount();
 
-    const stripePromise = await loadStripe("pk_test_51PQQCu2NJpcN49oVE6dZ8YA4eWoLEsySfzWGb8lGv1QITXwIkdeRZ3uJ76Go6mQi7rXgyZzBkK2JDbiRt7bTpms400eS5zpV6U");
+    const stripePromise = await loadStripe(
+      "pk_test_51PQQCu2NJpcN49oVE6dZ8YA4eWoLEsySfzWGb8lGv1QITXwIkdeRZ3uJ76Go6mQi7rXgyZzBkK2JDbiRt7bTpms400eS5zpV6U"
+    );
 
     try {
       const response = await axios.post("http://localhost:4000/payment", {
         amount,
-        category: cart[0].category,  // Assuming single category for simplicity
-        quantity: cart.length,  // Total number of items
-        size: cart.map((i) => i.size).flat(),  // Flattened array of sizes
-        image: cart[0].image  // Assuming single image for simplicity
+        category: cart[0].category, // Assuming single category for simplicity
+        quantity: cart.length, // Total number of items
+        size: cart.map((i) => i.size).flat(), // Flattened array of sizes
+        image: cart[0].image, // Assuming single image for simplicity
       });
 
       const session = response.data;
       const stripe = await stripePromise;
 
       const result = await stripe.redirectToCheckout({
-        sessionId: session.sessionId
+        sessionId: session.sessionId,
       });
 
       if (result.error) {

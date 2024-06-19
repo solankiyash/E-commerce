@@ -6,23 +6,22 @@ import Item from "../Components/Item/Item";
 
 function ShopCategory(props) {
   // let { all_product } = useContext(ShopContext);
-  const [all_product,setAllProduct] = useState([])
+  const [all_product, setAllProduct] = useState([]);
   const [visibleproduct, setVisibleProduct] = useState(8);
   const [uniquePrices, setUniquePrices] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-
-
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   useEffect(() => {
-    axios.get("http://localhost:4000/product/getallproduct")
-    .then((res) => setAllProduct(res.data))
-    .catch((err) => console.log(err))
-  },[])
-console.log(all_product,"allProducts")
+    axios
+      .get("http://localhost:4000/product/getallproduct")
+      .then((res) => setAllProduct(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+  console.log(all_product, "allProducts");
   useEffect(() => {
     let allPrices = [];
     all_product.forEach((option) => {
@@ -36,12 +35,14 @@ console.log(all_product,"allProducts")
   useEffect(() => {
     if (selectedOption !== null) {
       const filtered = all_product.filter(
-        (item) => item.category === props.category && item.new_price === selectedOption
+        (item) =>
+          item.category === props.category && item.new_price === selectedOption
       );
       setFilteredProducts(filtered);
-      
     } else {
-      setFilteredProducts(all_product.filter(item => item.category === props.category));
+      setFilteredProducts(
+        all_product.filter((item) => item.category === props.category)
+      );
     }
   }, [selectedOption, all_product, props.category]);
 

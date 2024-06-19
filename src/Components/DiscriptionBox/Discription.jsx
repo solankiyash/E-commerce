@@ -19,7 +19,10 @@ function Discription() {
           molestias, saepe quo eaque ipsa doloribus?
         </p>
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam reprehenderit fugit eaque numquam similique maxime fugiat, esse minus in dolor adipisci! Nam autem minus provident recusandae vel ducimus alias sit?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
+          reprehenderit fugit eaque numquam similique maxime fugiat, esse minus
+          in dolor adipisci! Nam autem minus provident recusandae vel ducimus
+          alias sit?
         </p>
       </div>
     </div>

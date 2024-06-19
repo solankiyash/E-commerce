@@ -7,12 +7,12 @@
 }
 .populer h1{
     color: #171717;
-    font-size: 50px;
-    font-weight: 600;
+    font-size: 40px;
+    font-weight: 500;
 }
 .populer hr{
     width: 200px;
-    height: 6px;
+    height: 3px;
     border-radius: 10px;
     background: #252525;
 }
@@ -23,13 +23,13 @@
 }
 /* Example CSS */
 .icon-star-empty {
-    color: #ddd; /* Color for empty star */
-    font-size: 50px;
+    color: #ddd; 
+    font-size: 20px;
   }
   
   .icon-star-full {
-    color: gold; /* Color for filled star */
-    font-size: 50px;
+    color: #ef5c51; /* Color for filled star */
+    font-size: 20px;
   }
   
   

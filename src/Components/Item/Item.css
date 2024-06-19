@@ -1,12 +1,11 @@
-.item{
+/* .item{
     width: 400px;
     margin: 0px 20px;
-}
+} */
 .item img{
-    width: 400px;
+    width: 250px;
     margin: 0px 20px;
 }
-
 .item p{
     margin: 6px 20px;
 }
